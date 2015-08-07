@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('home', ['as' => 'SU03', 'uses' => 'HomeController@index']);
