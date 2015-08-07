@@ -11,9 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+
+Route::get('/', ['as' => 'SESSION_MANAGER', 'uses' => 'HomeController@index']);
+
+
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('login', ['as' => 'SU00', 'uses' => 'Auth\AuthController@getLogin']);
+    Route::post('login',  ['as' => 'SU00P', 'uses' => 'Auth\AuthController@postLogin']);
+    Route::get('logout', ['as' => 'SU00O', 'uses' =>  'Auth\AuthController@getLogout']);
 });
 
 
-Route::get('home', ['as' => 'SU03', 'uses' => 'HomeController@index']);
+
+
+//Route::controllers([
+//    'auth' => 'Auth\AuthController',
+//    'password' => 'Auth\PasswordController',
+//]);
