@@ -1,5 +1,6 @@
 var elixir = require('laravel-elixir');
 
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -12,8 +13,15 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
-    mix.sass('app.scss');
-    mix.phpSpec();
+    mix.sass("app.scss")
+        .browserify("app.js");
+        //.scripts([
+        //    //"jquery.min.js",
+        //    //"dropzone.js",
+        //    "vue.min.js"
+        //]);
+
+ //   mix.phpSpec();
 });
 
 //gulp.task('test', function() {

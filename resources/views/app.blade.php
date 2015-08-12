@@ -35,7 +35,8 @@
             <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
 
-                {{--<li><a href="/materials">Materials</a></li>--}}
+                <li><a href="/materials">Materials</a></li>
+                <li><a href="/files">files</a></li>
                 {{--<li><a href="/customers">Customers</a></li>--}}
                 {{--<li><a href="/printers">Printers</a></li>--}}
                 {{--<li><a href="/materials/import">MM_IMPORT</a></li>--}}
@@ -92,7 +93,6 @@
     </div>
 </nav>
 <!-- Scripts -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/all.js"></script>
 </body>
 </html>
