@@ -10655,11 +10655,11 @@ new Vue({
     },
 
     components: {
-        'quote': require('./views/quote')
+        'quote': require('./components/Material')
     }
 });
 
-},{"./views/quote":79,"vue":74,"vue-resource":3}],77:[function(require,module,exports){
+},{"./components/Material":77,"vue":74,"vue-resource":3}],77:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -10670,7 +10670,7 @@ module.exports = {
     data: function data() {
         return {
             material: {
-                id: '97100206',
+                id: '',
                 description: '',
                 emg: '',
                 cost: 0
@@ -10682,7 +10682,7 @@ module.exports = {
 
     methods: {
         find_material: function find_material() {
-            this.$http.get('/materials/' + this.material.id).success(function (material) {
+            this.$http.get('/materials/97100206').success(function (material) {
                 this.material = material;
                 this.valid = true;
 
@@ -10697,37 +10697,4 @@ module.exports = {
 
 },{"./material.template.html":78}],78:[function(require,module,exports){
 module.exports = '<input type="text"\n       name="material"\n       id="material"\n       class="form-control"\n       v-model="material.id"\n       v-on="blur: validate">\n       <!--v-attr="readonly: valid">-->\n\n<p class="label label-primary" v-text="material.description"></p>\n\n';
-},{}],79:[function(require,module,exports){
-'use strict';
-
-module.exports = {
-
-    template: require('./quote.template.html'),
-
-    data: function data() {
-        return {
-            cost: 0
-            //discount: 0
-        };
-    },
-
-    components: {
-        material: require('../components/Material')
-    },
-
-    filters: {
-        material: function material(cost) {
-            return cost / 0.454;
-        }
-    },
-
-    methods: {
-        //applyDiscount: function(discount) {
-        //    this.discount = discount;
-        //}
-    }
-};
-
-},{"../components/Material":77,"./quote.template.html":80}],80:[function(require,module,exports){
-module.exports = '<h1>\n    Create Price Quote\n</h1>';
 },{}]},{},[76]);

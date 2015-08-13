@@ -14,12 +14,12 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass("app.scss")
-        .browserify("app.js");
-        //.scripts([
-        //    //"jquery.min.js",
-        //    //"dropzone.js",
-        //    "vue.min.js"
-        //]);
+        .browserify("app.js")
+        .scripts([
+            "jquery.min.js",
+            "bootstrap.min.js"
+            //"dropzone.js",
+        ]);
 
  //   mix.phpSpec();
 });
