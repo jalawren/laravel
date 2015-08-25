@@ -20,7 +20,7 @@ class FileController extends Controller
 
         $this->middleware('auth');
 
-        $this->middleware('permit');
+//        $this->middleware('permit');
     }
 
 
