@@ -18,7 +18,7 @@ class PriceController extends Controller
         $this->price = $price;
 
         $this->middleware('auth');
-        $this->middleware('permit');
+//        $this->middleware('permit');
         $this->middleware('file_check');
     }
 
