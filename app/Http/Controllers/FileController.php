@@ -57,7 +57,7 @@ class FileController extends Controller
         // Place File in Storage
         $filename = $upload->getClientOriginalName();
 
-        Storage::put("12345" . $filename, $upload);
+        Storage::put($filename, $upload);
 
         // Back up DB table
         // Run Excel Import Update Database

@@ -17,7 +17,7 @@ class FileManagerController extends Controller
 
         $this->middleware('auth');
 
-        $this->middleware('permit');
+//        $this->middleware('permit');
     }
 
     /**

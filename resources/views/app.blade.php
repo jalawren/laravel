@@ -31,7 +31,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Benda-Lutz</a>
+            <a class="navbar-brand" href="#">borealis</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -39,11 +39,8 @@
                 <li><a href="/">Home</a></li>
 
                 <li><a href="/materials">Materials</a></li>
-                <li><a href="/files">files</a></li>
-                {{--<li><a href="/customers">Customers</a></li>--}}
-                {{--<li><a href="/printers">Printers</a></li>--}}
-                {{--<li><a href="/materials/import">MM_IMPORT</a></li>--}}
-                {{--<li><a href="/prices">CUSTPRICE</a></li>--}}
+                <li><a href="/filemanager">files</a></li>
+
                 <li><a href="/borealis">Price Quotes</a></li>
 
 
