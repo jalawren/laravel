@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>jalawren.website - borealis api</title>
 
+    <link href="/css/dropzone.css" rel="stylesheet">
     <link href="/css/app.css" rel="stylesheet">
 
     <!-- Fonts -->
@@ -17,6 +18,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -41,7 +44,7 @@
                 {{--<li><a href="/printers">Printers</a></li>--}}
                 {{--<li><a href="/materials/import">MM_IMPORT</a></li>--}}
                 {{--<li><a href="/prices">CUSTPRICE</a></li>--}}
-                {{--<li><a href="/core">CORE</a></li>--}}
+                <li><a href="/borealis">Price Quotes</a></li>
 
 
                 {{--<li><a href="#">COA</a></li>--}}
@@ -71,15 +74,37 @@
 
 
 <nav class="navbar navbar-default navbar-fixed-bottom  br-taskbar">
+
     <div class="container-fluid">
 
         <div>
 
             <ul class="nav navbar-nav">
+
+                @if(\Session::has('flash_success'))
+
+                    <div class="alert alert-success br-alert">
+
+                        <span class="glyphicon glyphicon-ok"> </span> {{ \Session::get('flash_success') }}
+
+                    </div>
+                @elseif(\Session::has('flash_danger'))
+
+                    <div class="alert alert-danger br-alert">
+
+                        <span class="glyphicon glyphicon-warning-sign"> </span> {{ \Session::get('flash_danger') }}
+                    </div>
+                @endif
+
+
                 @if (Session::has('flash_notification.message'))
+
                     <div class="alert alert-{{ Session::get('flash_notification.level') }} br-alert">
+
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
                         <span class="glyphicon glyphicon-lock"></span>
+
                         {{ Session::get('flash_notification.message') }}
                     </div>
                 @endif
@@ -92,7 +117,26 @@
         </div>
     </div>
 </nav>
-<!-- Scripts -->
-<script src="/js/all.js"></script>
+<script src="js/vendor.js" type="text/javascript"></script>
+<script src="js/app.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+//    $("div#drop").dropzone({ url: "files/import" });
+
+
+
+    Dropzone.options.excelDrop = {
+
+        paramName    : "file",
+
+        maxFilesize  : 3,
+
+        filesAccepted: ".xlsx",
+
+        clickable    : true
+
+    };
+
+</script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CustomerMaterial;
 use App\Import;
 use App\Material;
 use Cache;
@@ -21,6 +22,7 @@ class MaterialController extends Controller
         $this->material = $material;
 
         $this->middleware('auth');
+
         $this->middleware('permit');
     }
 
@@ -32,31 +34,34 @@ class MaterialController extends Controller
      */
     public function index()
     {
-        $materials = $this->material->all();
-        $lb = Cache::get('LB');
-        return view('materials.index', compact('materials', 'lb'));
+
+//        return $this->material->finished()->limit(10)->get();
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
+     * @param CustomerMaterial $customer_material
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Model|null|static
      */
-    public function excel(Import $import)
+    public function getByCustomer(CustomerMaterial $customer_material, $id)
     {
-       // $this->material->import($import);
+        return $customer_material->with('customer', 'material.boms.component')
+            ->where('customer', '=', $id)
+            ->firstOrFail();
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function import()
     {
-        //
+        $this->material->truncate();
+
+        $this->material->import();
+
+        return redirect()->route('ZD00');
     }
+
 
     /**
      * Display the specified resource.
@@ -66,42 +71,10 @@ class MaterialController extends Controller
      */
     public function show($id)
     {
-        return $this->material->find($id);
+        return $this->material->where('material', '=', $id)->firstOrFail();
 
 //        return view('materials.show', compact('material'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

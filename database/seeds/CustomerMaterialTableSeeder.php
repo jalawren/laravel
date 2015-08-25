@@ -21,5 +21,7 @@ class CustomerMaterialTableSeeder extends Seeder
     public function run()
     {
         $this->customer_material->import();
+
+        $this->customer_material->import_cmir();
     }
 }

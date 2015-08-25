@@ -14,12 +14,11 @@ class CreateBomsTable extends Migration
     {
         Schema::create('boms', function (Blueprint $table) {
 
-            $table->string('bom_usage', 1)->default(5);
-            $table->integer('material_id')->unsigned();
+            $table->integer('material')->unsigned();
             $table->string('item_number', 5);
-            $table->integer('component_id')->unsigned();
+            $table->integer('component')->unsigned();
             $table->double('component_quantity', 8, 3);
-            $table->string('component_unit', 4);
+            $table->string('component_unit_of_measure', 4);
 
             $table->timestamps();
         });

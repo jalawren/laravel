@@ -4,25 +4,30 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Session;
+
 
 class Bom extends Model
 {
     protected $table = 'boms';
 
+    protected $filename = 'ZPTF_BOMDATA.XLSX';
+
+
     protected $fillable = [
-        'material_id',
+        'material',
         'item_number',
-        'component_id',
+        'component',
         'component_quantity',
-        'component_unit'
+        'component_unit_of_measure'
     ];
 
     protected $hidden = [
+
         'created_at',
         'updated_at',
-        'material_id'
+        'material',
+//        'component'
+
     ];
 
     /**
@@ -34,47 +39,22 @@ class Bom extends Model
         return number_format($value, 3);
     }
 
-    /**
-     * @param $query
-     * @return mixed
-     */
-    public function scopeSales($query)
-    {
-        return $query->where('bom_usage', '=', '5');
-    }
-
-    /**
-     * @param $query
-     * @return mixed
-     */
-    public function scopeBase($query)
-    {
-        return $query->where('component_id', '>=', '57000000')
-                        ->where('component_id', '<=', '58000000');
-    }
-
-    /**
-     * @param $query
-     * @return mixed
-     */
-    public function scopeProduction()
-    {
-        return $this->where('bom_usage', '=', 1);
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function material()
     {
-        return $this->belongsTo('App\Material', 'material_id', 'id');
+        return $this->belongsTo('App\Material', 'material', 'material');
     }
+
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function component()
     {
-        return $this->belongsTo('App\Material', 'component_id', 'id');
+        return $this->belongsTo('App\Material', 'component', 'material');
     }
 
 
@@ -83,33 +63,17 @@ class Bom extends Model
      */
     public function import()
     {
-        $file = 'ZPTF_BOMDATA5.XLSX';
+        $this->delete();
 
-        if(Storage::exists($file)) {
+        Excel::load('/storage/app/'. $this->filename, function ($reader) {
 
-            $this->delete();
+            $reader->get($this->fillable);
 
-            \Excel::load('/storage/app/'. $file, function ($reader) {
+            $reader->each(function ($row) {
 
-                $reader->each(function ($row) {
-
-                    $array = [
-                        'bom_usage'          => $row->bom_usage,
-                        'material_id'        => $row->material,
-                        'item_number'        => $row->item_number,
-                        'component_id'       => $row->component,
-                        'component_quantity' => $row->component_quantity,
-                        'component_unit'     => $row->component_unit_of_measure
-                    ];
-
-                    $this->create($array);
-                });
+                $this->create($row->toArray());
             });
 
-            Session::flash('flash_success', 'Table successfully imported!');
-        }
-        else {
-            Session::flash('flash_danger', 'File: '. $file .' does not exist.');
-        }
+        });
     }
 }

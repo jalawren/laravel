@@ -58,15 +58,15 @@ return array(
     ),
 
     'properties' => array(
-        'creator'        => 'Maatwebsite',
-        'lastModifiedBy' => 'Maatwebsite',
-        'title'          => 'Spreadsheet',
-        'description'    => 'Default spreadsheet export',
+        'creator'        => 'Jason Lawrence',
+        'lastModifiedBy' => 'Jason Lawrence',
+        'title'          => 'BDL_BR',
+        'description'    => 'File Export',
         'subject'        => 'Spreadsheet export',
-        'keywords'       => 'maatwebsite, excel, export',
+        'keywords'       => 'lawrja, excel, export',
         'category'       => 'Excel',
-        'manager'        => 'Maatwebsite',
-        'company'        => 'Maatwebsite',
+        'manager'        => 'Jason Lawrence',
+        'company'        => 'SunChemical Corporation',
     ),
 
     /*
@@ -442,7 +442,8 @@ return array(
         |
         */
 
-        'ignoreEmpty'             => false,
+        'ignoreEmpty'             => true,
+//        'ignoreEmpty'             => false,
 
         /*
         |--------------------------------------------------------------------------

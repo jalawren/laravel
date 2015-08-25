@@ -38,6 +38,9 @@ class UserTableSeeder extends Seeder
         $perm->permissions()->attach(4002);
         $perm->permissions()->attach(4003);
         $perm->permissions()->attach(4004);
+        $perm->permissions()->attach(4005);
+        $perm->permissions()->attach(4006);
+        $perm->permissions()->attach(4007);
 
         $perm->users()->attach(100000);
 

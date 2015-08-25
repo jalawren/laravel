@@ -10648,53 +10648,109 @@ var Vue = require('vue');
 Vue.use(require('vue-resource'));
 
 new Vue({
-    el: '#app',
 
-    data: {
-        currentView: 'quote'
+    el: '#price-quote',
+
+    ready: function ready() {
+        //
+
     },
 
-    components: {
-        'quote': require('./components/Material')
-    }
-});
+    data: {
 
-},{"./components/Material":77,"vue":74,"vue-resource":3}],77:[function(require,module,exports){
-'use strict';
+        customer_id: "",
+        material_id: "",
 
-module.exports = {
-    template: require('./material.template.html'),
-
-    //props: ['when-applied'],
-
-    data: function data() {
-        return {
-            material: {
-                id: '',
-                description: '',
-                emg: '',
-                cost: 0
-            },
-
-            valid: false
-        };
+        material_valid: false,
+        customer_valid: false,
+        cmir_valid: false
     },
 
     methods: {
-        find_material: function find_material() {
-            this.$http.get('/materials/97100206').success(function (material) {
-                this.material = material;
-                this.valid = true;
 
-                //  this.whenApplied(coupon.discount);
+        /**
+         * Runs Ajax server requests
+         */
+        update: function update() {
+
+            this.getCustomers();
+            this.getMaterials();
+            this.getCustomerMaterials();
+            this.getBoms();
+        },
+
+        /*
+         * Resets Form
+         */
+        reset: function reset() {
+
+            this.$set('customer_id', "");
+            this.$set('material_id', "");
+
+            this.$set('customer_valid', false);
+            this.$set('material_valid', false);
+            this.$set('cmir_valid', false);
+        },
+
+        /**
+         * Call Material AJAX request
+         */
+        getMaterials: function getMaterials() {
+
+            this.$http.get('/materials/' + this.material_id).success(function (material) {
+
+                this.$set('material', material);
+                this.$set('material_valid', true);
             }).error(function () {
-                this.material.id = '';
-                this.material.description = 'Sorry, that material does not exist.';
+
+                this.$set('material', null);
+                this.$set('material_valid', false);
+            });
+        },
+
+        /**
+         * Boms AJAX
+         */
+        getBoms: function getBoms() {
+
+            this.$http.get('/boms/' + this.material_id, function (boms) {
+
+                this.$set('boms', boms);
+            });
+        },
+
+        /**
+         * Customer AJAX
+         */
+        getCustomers: function getCustomers() {
+
+            this.$http.get('/customers/' + this.customer_id).success(function (customer) {
+
+                this.$set('customer', customer);
+                this.$set('customer_valid', true);
+            }).error(function () {
+
+                this.$set('customer', null);
+                this.$set('customer_valid', false);
+            });
+        },
+
+        /**
+         * CMIR AJAX
+         */
+        getCustomerMaterials: function getCustomerMaterials() {
+
+            this.$http.get('/cmir/' + this.customer_id + "/" + this.material_id).success(function (customer_material) {
+
+                this.$set('customer_material', customer_material);
+                this.$set('cmir_valid', true);
+            }).error(function () {
+
+                this.$set('customer_material', null);
+                this.$set('cmir_valid', false);
             });
         }
     }
-};
+});
 
-},{"./material.template.html":78}],78:[function(require,module,exports){
-module.exports = '<input type="text"\n       name="material"\n       id="material"\n       class="form-control"\n       v-model="material.id"\n       v-on="blur: validate">\n       <!--v-attr="readonly: valid">-->\n\n<p class="label label-primary" v-text="material.description"></p>\n\n';
-},{}]},{},[76]);
+},{"vue":74,"vue-resource":3}]},{},[76]);

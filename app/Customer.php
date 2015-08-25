@@ -11,9 +11,11 @@ class Customer extends Model
 {
     protected $table = 'customers';
 
+    protected $filename = 'VCUST.XLSX';
+
     protected $fillable = [
-        'id',
-        'name',
+        'customer',
+        'name_1',
         'street',
         'city',
         'region',
@@ -21,24 +23,27 @@ class Customer extends Model
         'country'
     ];
 
+    protected $hidden = [
+
+        'created_at',
+        'updated_at'
+
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function materials()
     {
-        return $this->hasMany('App\CustomerMaterial', 'customer_id', 'id');
+        return $this->hasMany('App\CustomerMaterial', 'customer', 'customer');
     }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function prices()
     {
-        return $this->hasMany('App\CustomerPrice', 'customer_id', 'id');
+        return $this->hasMany('App\CustomerPrice', 'sold_to', 'customer');
     }
-
-
-
-
 
 
     /**
@@ -46,34 +51,16 @@ class Customer extends Model
      */
     public  function import()
     {
-        $file = 'VCUST.XLSX';
+        $this->delete();
 
-        if(Storage::exists($file)) {
+        Excel::load(storage_path('app/') . $this->filename, function ($reader) {
 
-            $this->delete();
+            $reader->each(function ($row) {
 
-            Excel::load(storage_path('app/') . $file, function ($reader) {
-
-                $reader->each(function ($row) {
-
-                    $array = [
-                        'id'            => $row->customer,
-                        'name'          => $row->name_1,
-                        'street'        => $row->street,
-                        'city'          => $row->city,
-                        'region'        => $row->region,
-                        'postal_code'   => $row->postal_code,
-                        'country'       => $row->country
-                    ];
-
-                    $this->create($array);
-                });
+                $this->create($row->toArray());
             });
 
-            Session::flash('flash_success', 'Table successfully imported!');
-        }
-        else {
-            Session::flash('flash_danger', 'File: '. $file .' does not exist.');
-        }
+        });
+
     }
 }

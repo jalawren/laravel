@@ -13,11 +13,13 @@ class PriceController extends Controller
 
     protected $price;
 
-    function __construct(CustomerPrice $price)
+    public function __construct(CustomerPrice $price)
     {
         $this->price = $price;
 
         $this->middleware('auth');
+        $this->middleware('permit');
+        $this->middleware('file_check');
     }
 
 
@@ -58,9 +60,10 @@ class PriceController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function scale($id)
     {
-        //
+        return $this->price->where('sap_material_number', '=', $id)
+            ->get();
     }
 
     /**

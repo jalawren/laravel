@@ -23,7 +23,7 @@ class FileTableSeeder extends Seeder
      */
     public function run()
     {
-        $this->file->import();
         $this->file_type->import();
+        $this->file->import();
     }
 }

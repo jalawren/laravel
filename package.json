@@ -8,7 +8,8 @@
     "jquery": "*",
     "laravel-elixir": "^3.0.0",
     "vue": "^0.12.1",
-    "vue-resource": "^0.1.3"
+    "vue-resource": "^0.1.3",
+    "jspdf": "*"
 
   }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCustomerMaterialsTable extends Migration
+class CreatePriceQuotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,16 @@ class CreateCustomerMaterialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer_materials', function (Blueprint $table) {
+        Schema::create('price_quotes', function (Blueprint $table) {
+            $table->increments('id');
 
             $table->integer('customer')->unsigned();
             $table->integer('material')->unsigned();
-            $table->string('customer_material_number')->nullable();
-            $table->string('customers_description_of_material')->nullable();
+            $table->json('bom');
+            $table->json('price_scale');
+            $table->tinyInteger('revision')->default(1);
+            $table->date('issue_date');
+            $table->date('expiration_date');
 
             $table->timestamps();
         });
@@ -30,6 +34,6 @@ class CreateCustomerMaterialsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('customer_materials');
+        Schema::drop('price_quotes');
     }
 }

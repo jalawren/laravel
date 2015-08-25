@@ -14,17 +14,15 @@ class CreateMaterialsTable extends Migration
     {
         Schema::create('materials', function(Blueprint $table)
         {
-            $table->integer('id')->unsigned();
-            $table->string('description', 40);
-            $table->string('material_type', 4);
-            $table->string('emg', 30);
-            $table->float('cost', 8,2)->default(0.00);
-            $table->integer('per')->default(1);
-            $table->string('uom', 5)->default('KG');
-            $table->longtext('notes')->nullable();
+            $table->integer('material')->unsigned();
+            $table->string('mtyp', 4);
+            $table->string('material_description', 40);
+            $table->string('ext_material_grp', 30);
+            $table->float('standard_price', 8,2)->default(0.00);
+
             $table->timestamps();
 
-            $table->primary('id');
+            $table->primary('material');
         });
     }
 

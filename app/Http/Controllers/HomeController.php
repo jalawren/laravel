@@ -25,6 +25,11 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function info()
+    {
+//        return phpinfo();
+    }
+
     /**
      * Show the form for creating a new resource.
      *

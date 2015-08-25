@@ -14,8 +14,8 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
 
-            $table->integer('id')->unsigned();
-            $table->string('name', 100);
+            $table->integer('customer')->unsigned();
+            $table->string('name_1', 100);
             $table->string('street', 100);
             $table->string('city', 100);
             $table->string('region');
@@ -24,7 +24,7 @@ class CreateCustomersTable extends Migration
             $table->timestamps();
 
 
-            $table->primary('id');
+            $table->primary('customer');
         });
     }
 

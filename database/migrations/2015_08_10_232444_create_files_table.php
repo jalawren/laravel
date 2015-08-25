@@ -12,6 +12,16 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
+        Schema::create('file_types', function (Blueprint $table) {
+
+            $table->increments('id');
+            $table->string('name', 50)->unique();
+            $table->string('description', 50)->nullable();
+
+
+            $table->timestamps();
+        });
+
         Schema::create('files', function (Blueprint $table) {
 
             $table->increments('id');
@@ -23,6 +33,9 @@ class CreateFilesTable extends Migration
             $table->string('description')->nullable();
 
             $table->timestamps();
+
+            $table->foreign('file_type_id')->references('id')->on('file_types')
+                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -34,5 +47,6 @@ class CreateFilesTable extends Migration
     public function down()
     {
         Schema::drop('files');
+        Schema::drop('file_types');
     }
 }

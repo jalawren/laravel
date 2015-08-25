@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\FileUploadRequest;
-use App\Import;
 use Auth;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\File;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +19,8 @@ class FileController extends Controller
         $this->file = $file;
 
         $this->middleware('auth');
+
+        $this->middleware('permit');
     }
 
 
@@ -38,15 +36,7 @@ class FileController extends Controller
         return view('files.index', compact('files'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     public function import()
     {
@@ -61,18 +51,19 @@ class FileController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(FileUploadRequest $request, Import $import)
+    public function move(Request $request)
     {
-        $name = $request->input('file_name');
-        $file = $request->file('file');
+        $upload = $request->file('file');
         // Place File in Storage
-        Storage::put($name, $file);
+        $filename = $upload->getClientOriginalName();
+
+        Storage::put("12345" . $filename, $upload);
 
         // Back up DB table
         // Run Excel Import Update Database
         // Consistency check
         // Update import table for upload scheduling
-        $import->create(['name' => $file->file_name, 'user_id' => Auth::user()->id ]);
+//        $import->create(['name' => $file->file_name, 'user_id' => Auth::user()->id ]);
         // Move file to Archive
 
     }

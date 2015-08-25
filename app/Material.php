@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Cache;
 use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
@@ -13,18 +14,30 @@ class Material extends Model
 
     protected $table = 'materials';
 
+    protected $filename = 'ZPTF_COSTDATA.XLSX';
+
 
     protected $fillable = [
-        'id',
-        'description',
-        'material_type',
-        'emg',
-        'cost',
+
+        'material',
+        'material_description',
+        'mtyp',
+        'ext_material_grp',
+        'standard_price'
+
+    ];
+
+    protected $hidden = [
+
+//        'mtyp',
         'created_at',
         'updated_at'
+
     ];
 
     /**
+     * Show Bases
+     *
      * @param $query
      * @return mixed
      */
@@ -34,63 +47,65 @@ class Material extends Model
             ->orWhere('emg', '=', 'VLBS');
     }
 
+    /**
+     * Show 97m Materials
+     *
+     * @param $query
+     * @return mixed
+     */
+    public function scopeFinished($query)
+    {
+        return $query->where('mtyp', '=', 'ZBND');
+    }
 
     /**
+     * Boms
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function boms()
     {
-        return $this->hasMany('App\Bom', 'material_id', 'id');
+        return $this->hasMany('App\Bom', 'material', 'material');
     }
-
-    public function prices()
-    {
-        return $this->hasMany('App\CustomerPrice', 'material_id', 'id');
-    }
-
-
-
-
-
-protected function reader($reader)
-{
-    $reader->each(function ($row)
-    {
-
-        $array = [
-            'id'            => $row->material,
-            'description'   => $row->material_description,
-            'material_type' => $row->mtyp,
-            'emg'           => $row->ext_material_grp,
-            'cost'          => $row->standard_price,
-            'uom'           => $row->bun
-        ];
-
-        $this->create($array);
-    });
-}
 
     /**
-     * @throws \Exception
+     * Prices
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function prices()
+    {
+        return $this->hasMany('App\CustomerPrice', 'sap_material_number', 'material');
+    }
+
+    /**
+     * CMIR
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function customer_material()
+    {
+        return $this->hasMany('App\CustomerMaterial', 'material', 'material');
+    }
+
+
+    /**
+     * Import Excel File.
      */
     public function import()
     {
-        $file = 'ZPTF_COSTDATA.XLSX';
+        $this->delete();
 
-        if(Storage::exists($file)) {
+        Excel::load('/storage/app/' . $this->filename, function ($reader) {
 
-            $this->delete();
 
-            Excel::load(storage_path('app/') . $file, function ($reader) {
+            $reader->each(function ($row) {
 
-                $this->reader($reader);
+                $this->create($row->toArray());
             });
 
-            Session::flash('flash_success', 'Table successfully imported!');
-        }
-        else {
-            Session::flash('flash_danger', 'File: '. $file .' does not exist.');
-        }
+        });
 
+        Session::flash('flash_success', 'Table successfully imported!');
     }
 }

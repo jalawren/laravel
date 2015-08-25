@@ -9,16 +9,28 @@ use Illuminate\Support\Facades\Session;
 
 class CustomerMaterial extends Model
 {
+
     protected $table = 'customer_materials';
+
+    protected $filename = 'ZOTC_VD59.XLSX';
 
     protected $fillable = [
 
-        'customer_id',
-        'material_id',
+        'customer',
         'material',
-        'description'
+        'customer_material_number',
+        'customers_description_of_material'
+
     ];
 
+    protected $hidden = [
+
+        'customer',
+        'material',
+        'created_at',
+        'updated_at'
+
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -41,9 +53,22 @@ class CustomerMaterial extends Model
      */
     public function import()
     {
-        $file = 'ZOTC_VD59.XLSX';
+            $this->delete();
 
-        if(Storage::exists($file)) {
+            Excel::load('/storage/app/'. $this->filename, function ($reader) {
+
+                $reader->each(function ($row) {
+
+                    $this->create($row->toArray());
+                });
+
+            });
+    }
+
+
+    public function import_cmir()
+    {
+        $file = 'ZOTCR_CUSTPRICE.XLSX';
 
             $this->delete();
 
@@ -51,24 +76,19 @@ class CustomerMaterial extends Model
 
                 $reader->each(function ($row) {
 
-                    $array = [
-                        'customer_id'            => $row->customer,
-                        'material_id'            => $row->material,
-                        'material'   => $row->customer_material_number,
-                        'description'   => $row->customers_description_of_material
+                    if($row->cmir != "") {
 
-                    ];
+                        $key_array = [
+                            'customer_id'                       => $row->sold_to,
+                            'material_id'                       => $row->sap_material_number,
+                            'customer_material_number'          => $row->cmir,
+                            'customers_description_of_material' => $row->cmir_desc
+                        ];
 
-                    $this->create($array);
+                        $this->create($key_array);
+                    }
                 });
+
             });
-
-            Session::flash('flash_success', 'Table successfully imported!');
-        }
-        else {
-            Session::flash('flash_danger', 'File: '. $file .' does not exist.');
-        }
-
-
     }
 }

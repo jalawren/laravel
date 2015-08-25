@@ -1,16 +1,27 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jalawren
- * Date: 8/10/15
- * Time: 6:08 PM
- */
 
 namespace App;
 
 
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
+
 class FileManager
 {
+
+    protected $results = [];
+
+
+
+    public function check()
+    {
+        //Check file existence, expiration
+
+        return 1;
+//        return 0;
+    }
 
 
 }
