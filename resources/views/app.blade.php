@@ -35,16 +35,14 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
             <ul class="nav navbar-nav">
+
                 <li><a href="/">Home</a></li>
 
-                <li><a href="/materials">Materials</a></li>
-                <li><a href="/filemanager">files</a></li>
+                <li><a href="/filemanager">File Manager</a></li>
 
                 <li><a href="/borealis">Price Quotes</a></li>
-
-
-                {{--<li><a href="#">COA</a></li>--}}
 
             </ul>
 
