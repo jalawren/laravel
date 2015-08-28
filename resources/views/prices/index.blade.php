@@ -88,6 +88,39 @@
                                         </tr>
                                    </tbody>
                                </table>
+                               <p> Base</p>
+
+                                <table class="table table-striped table-hover" v-show="cmir_valid">
+                                    <thead>
+                                        <tr>
+                                            <th>Material</th>
+
+                                            <th>Description</th>
+
+                                            <th>Quantity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-repeat="base">
+                                            <td>@{{ component.material }}</td>
+
+                                            <td>@{{ component.material_description }}</td>
+
+                                            <td>@{{ component_quantity }} %</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                                <div class="col-md-4">
+                                    <div>
+                                        @{{ customer_valid }}
+                                        @{{ material_valid }}
+                                        @{{ cmir_valid }}
+                                    </div>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -95,12 +128,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <pre>
-            @{{{"cmir" : cmir_valid, "mat" : material_valid, "cust" : customer_valid} | json }}
-        </pre>
 
-    </div>
 @endsection
 
 <script src="/js/app.js" type="text/javascript"></script>

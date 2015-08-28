@@ -63,6 +63,7 @@ Route::group(['prefix' => 'materials'], function () {
 Route::group(['prefix' => 'boms'], function () {
 
     Route::get('/{id}', ['as' => 'CS03', 'uses' =>  'BomController@show']);
+    Route::get('/base/{id}', ['as' => 'CS04', 'uses' =>  'BomController@showBase']);
 });
 
 /*
@@ -80,7 +81,7 @@ Route::group(['prefix' => 'files'], function () {
 
     Route::get('/', ['as' => 'FM00', 'uses' => 'FileController@index']);
 
-//    Route::get('import', ['as' => 'FM06', 'uses' => 'FileController@import']);
+    Route::get('test/{file}', ['as' => 'FM06', 'uses' => 'FileController@test']);
 
-    Route::post('import', ['as' => 'FM07', 'uses' => 'FileController@move']);
+    Route::post('import', ['as' => 'FM07', 'uses' => 'FileManagerController@store']);
 });

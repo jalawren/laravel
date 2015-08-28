@@ -31,13 +31,7 @@ class File extends Model
         return $this->belongsTo('App\FileType', 'file_type_id', 'id');
     }
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function material()
-    {
-        return $this->belongsTo('App\Material', 'material_id', 'id');
-    }
+
     /**
      * Concatenate File Name and File Extension
      *
@@ -70,6 +64,7 @@ class File extends Model
         {
             return 1;
         }
+        return 0;
     }
 
 

@@ -32,6 +32,7 @@ new Vue({
             this.getMaterials();
             this.getCustomerMaterials();
             this.getBoms();
+            this.getBase();
         },
 
         /*
@@ -75,6 +76,15 @@ new Vue({
             this.$http.get('/boms/' + this.material_id, function (boms) {
 
                 this.$set('boms', boms);
+            });
+
+        },
+
+        getBase: function () {
+
+            this.$http.get('/boms/base/' + this.material_id, function (base) {
+
+                this.$set('base', base);
             });
         },
 

@@ -27,28 +27,16 @@ class MaterialController extends Controller
     }
 
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
 
-//        return $this->material->finished()->limit(10)->get();
-    }
 
-    /**
-     * @param CustomerMaterial $customer_material
-     * @param $id
-     * @return \Illuminate\Database\Eloquent\Model|null|static
-     */
     public function getByCustomer(CustomerMaterial $customer_material, $id)
     {
         return $customer_material->with('customer', 'material.boms.component')
             ->where('customer', '=', $id)
             ->firstOrFail();
     }
+
+
 
     /**
      * @return \Illuminate\Http\RedirectResponse

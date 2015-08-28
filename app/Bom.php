@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Material;
 use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -39,6 +40,11 @@ class Bom extends Model
         return number_format($value, 3);
     }
 
+    public function base()
+    {
+        return $this->belongsTo('App\Material', 'material', 'material')
+            ->where('materials.ext_material_group', '=', 'CSBS');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -56,6 +62,8 @@ class Bom extends Model
     {
         return $this->belongsTo('App\Material', 'component', 'material');
     }
+
+
 
 
     /**

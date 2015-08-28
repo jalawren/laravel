@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bom;
+use App\Material;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -17,8 +18,6 @@ class BomController extends Controller
         $this->bom = $bom;
 
         $this->middleware('auth');
-
-
     }
 
 
@@ -32,9 +31,29 @@ class BomController extends Controller
     {
         return $this->bom->with('component')
             ->where('material', '=', $id)
-//            ->where('component.prices.customer_id', '=', $customer)
-            ->orderBy('item_number')->get();
+            ->where('component_quantity', '!=', 100.000)
+            ->orderBy('item_number')
+            ->get();
+
     }
+
+    public function showBase($id)
+    {
+        return $this->bom->with('component')
+            ->where('material', '=', $id)
+            ->where('component_quantity', '=', 100.000)
+            ->orderBy('item_number')
+            ->get();
+
+//        return $this->with('component')->where('material', '=', $id)
+//            ->whereHas('component', function($query)
+//            {
+//                $query->where('ext_material_grp', '=', 'CSBS');
+//            })->orderBy('item_number')->get();
+
+    }
+
+
 
 
 }

@@ -1,3 +1,13 @@
 <component name="ProjectDictionaryState">
-  <dictionary name="jalawren" />
+  <dictionary name="jalawren">
+    <words>
+      <w>bomdata</w>
+      <w>costdata</w>
+      <w>custprice</w>
+      <w>vcust</w>
+      <w>zotc</w>
+      <w>zotcr</w>
+      <w>zptf</w>
+    </words>
+  </dictionary>
 </component>

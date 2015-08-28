@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Cache;
+use Excel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\File;
@@ -54,10 +56,13 @@ class FileController extends Controller
     public function move(Request $request)
     {
         $upload = $request->file('file');
-        // Place File in Storage
+
         $filename = $upload->getClientOriginalName();
 
-        Storage::put($filename, $upload);
+        $file = str_replace('.XLSX', '', $filename);
+
+
+        Cache::put($file, $file, 10);
 
         // Back up DB table
         // Run Excel Import Update Database
@@ -79,37 +84,16 @@ class FileController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
+
+    public function test($file)
     {
-        //
+        $filename = strtoupper($file);
+
+        return Excel::load('/storage/app/' . $filename . '.XLSX', function ($reader) {
+
+        })->get()->toArray();
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

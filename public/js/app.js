@@ -10717,6 +10717,10 @@ new Vue({
 
                 this.$set('boms', boms);
             });
+            this.$http.get('/boms/base/' + this.material_id, function (base) {
+
+                this.$set('base', base);
+            });
         },
 
         /**
