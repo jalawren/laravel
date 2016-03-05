@@ -9,7 +9,8 @@
     </head>
     <body>
       
-		<<div class="container">
+		<div class="container">
+			
 				<h3>coming soon</h3>
 				
 				<p>pardon the dust...</p>				
