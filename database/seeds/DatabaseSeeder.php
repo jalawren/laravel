@@ -1,9 +1,6 @@
 <?php
 
-
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,21 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::disableQueryLog();
-        Model::unguard();
-
-
-
-        $this->call(UserTableSeeder::class);
-        $this->call(FileTableSeeder::class);
-        $this->call(ConversionTableSeeder::class);
-
-//        $this->call(MaterialTableSeeder::class);
-//        $this->call(CustomerTableSeeder::class);
-//        $this->call(CustomerMaterialTableSeeder::class);
-//        $this->call(CustomerPriceTableSeeder::class);
-//        $this->call(BomTableSeeder::class);
-
-        Model::reguard();
+        // $this->call(UsersTableSeeder::class);
     }
 }

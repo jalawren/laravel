@@ -1,32 +1,9 @@
-@import "bootstrap-sass/assets/stylesheets/bootstrap";
+// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+.test-div {
 
-#app {
-
-  min-height: 200px;
-}
-
-
-.br-alert {
-  padding:3px;
-}
-
-.br-taskbar {
-  height:10px;
-  padding:10px 0;
-}
-
-.br-input-valid {
-  margin-left: 5px;
-}
-
-.dropzone {
-  border: 2px dashed #0087F7;
-  border-radius: 5px;
-  font-family: Roboto, "Open Sans", sans-serif;
-  font-size: 20px;
-}
-.dropzone .dz-message {
-  font-weight: 400;
+  border:1px solid dodgerblue;
+  border-radius: 6px;
+  padding:20px;
 
 }
