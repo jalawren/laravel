@@ -11604,7 +11604,7 @@ module.exports = {
                 panel: 1200,
                 shadow: 800,
                 cursor: 8000,
-                out: 11000
+                out: 50000
             },
 
             panel: false,
@@ -11618,17 +11618,9 @@ module.exports = {
 
     methods: {
 
-        //            toggleShadow:function() {
-        //
-        //                this.shadow = ! this.shadow;
-        //            },
-
         togglePanel: function togglePanel() {
 
             this.panel = !this.panel;
-            //                this.button = ! this.button;
-
-            //                setTimeout(this.toggleShadow, this.timeouts.shadow);
         },
 
         toggleCursor: function toggleCursor() {
