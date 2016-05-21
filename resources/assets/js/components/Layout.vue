@@ -76,8 +76,8 @@
 
                     panel  : 1200,
                     shadow : 800,
-                    cursor : 8000,
-                    out    : 50000
+                    cursor : 10000,
+                    out    : 15000
                 },
 
                 panel    : false,
