@@ -11558,7 +11558,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _vue2.default.use(require('vue-resource'));
 
 _vue2.default.transition('fade', {
-    enterClass: 'rubberBand',
+    enterClass: 'fadeInUp',
     leaveClass: 'fadeOutUp'
 });
 
@@ -11599,17 +11599,16 @@ module.exports = {
     data: function data() {
 
         return {
+
             timeouts: {
 
                 panel: 1200,
-                shadow: 800,
                 cursor: 10000,
                 out: 15000
             },
 
             panel: false,
             button: false,
-            shadow: false,
             cursor: false,
             complete: false,
             counter: 0
@@ -11646,15 +11645,13 @@ module.exports = {
 
         setTimeout(this.togglePanel, this.timeouts.panel);
 
-        setTimeout(this.toggleShadow, this.timeouts.shadow);
-
         setTimeout(this.toggleCursor, this.timeouts.cursor);
 
         setTimeout(this.togglePanel, this.timeouts.out);
     }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
-;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<!--<button v-if=\"button\" @click=\"togglePanel\">x</button>-->\n\n<div class=\"animated\" transition=\"fade\" v-if=\"panel\">\n    <div class=\"panel jl-panel\" v-bind:class=\"{ 'jl-shadow': shadow }\">\n        <div class=\"panel-body\">\n            <h3>\n                <span class=\"jl-font\"> &gt;</span>\n\n                <print text=\"jasontlawrence.com - coming soon\" time=\"1800\"></print>\n\n            </h3>\n\n            <!--<p>-->\n                <!--<print text=\"> coming soon!!!\" time=4500></print>-->\n            <!--</p>-->\n\n            <p>\n                <span v-if=\"complete\" class=\"jl-font\"> &gt;</span>\n\n                <span v-if=\"cursor\" class=\"jl-font jl-bold\">|</span>\n            </p>\n        </div>\n    </div>\n</div>\n"
+;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n\n<div class=\"animated\" transition=\"fade\" v-if=\"panel\">\n    <div class=\"panel jl-panel\">\n        <div class=\"panel-body\">\n            <h3>\n                <span class=\"jl-font\"> &gt;</span>\n\n                <print text=\"jasontlawrence.com - coming soon\" time=\"1800\"></print>\n\n            </h3>\n            <p>\n                <span v-if=\"complete\" class=\"jl-font\"> &gt;</span>\n\n                <span v-if=\"cursor\" class=\"jl-font jl-bold\">|</span>\n            </p>\n        </div>\n    </div>\n</div>\n"
 if (module.hot) {(function () {  module.hot.accept()
   var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), true)

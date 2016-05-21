@@ -8,7 +8,7 @@ import Support from './components/Support.vue';
 
 
 Vue.transition('fade', {
-    enterClass: 'rubberBand',
+    enterClass: 'fadeInUp',
     leaveClass: 'fadeOutUp'
 });
 

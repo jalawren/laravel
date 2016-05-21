@@ -35,10 +35,9 @@
 </style>
 
 <template>
-        <!--<button v-if="button" @click="togglePanel">x</button>-->
 
         <div class="animated" transition="fade" v-if="panel">
-            <div class="panel jl-panel" v-bind:class="{ 'jl-shadow': shadow }">
+            <div class="panel jl-panel">
                 <div class="panel-body">
                     <h3>
                         <span class="jl-font"> ></span>
@@ -46,11 +45,6 @@
                         <print text="jasontlawrence.com - coming soon" time="1800"></print>
 
                     </h3>
-
-                    <!--<p>-->
-                        <!--<print text="> coming soon!!!" time=4500></print>-->
-                    <!--</p>-->
-
                     <p>
                         <span v-if="complete" class="jl-font"> ></span>
 
@@ -72,17 +66,16 @@
         data:function() {
 
             return {
+
                 timeouts: {
 
                     panel  : 1200,
-                    shadow : 800,
                     cursor : 10000,
                     out    : 15000
                 },
 
                 panel    : false,
                 button   : false,
-                shadow   : false,
                 cursor   : false,
                 complete : false,
                 counter  : 0
@@ -118,8 +111,6 @@
         ready:function() {
 
             setTimeout(this.togglePanel, this.timeouts.panel);
-
-            setTimeout(this.toggleShadow, this.timeouts.shadow);
 
             setTimeout(this.toggleCursor, this.timeouts.cursor);
 
