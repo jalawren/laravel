@@ -1,9 +1,37 @@
  @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-.test-div {
+ @font-face {
+   font-family: pressStart;
+   src: url(/fonts/PressStart2P-Regular.ttf);
+ }
 
-  border:1px solid dodgerblue;
-  border-radius: 6px;
-  padding:20px;
+body {
+   padding:0px;
+   margin:0px;
+   background-color: #bababa;
 
 }
+.jl-container {
+   width:100%;
+   height:100%;
+   padding:50px;
+}
+
+ .jl-font {
+   font-family: "pressStart";
+   color: limegreen;
+ }
+
+// .jl-panel {
+//   width: 500px;
+//   min-height: 200px;
+//   border-radius: 0;
+//   text-align:left;
+// }
+// .jl-shadow {
+//
+//   box-shadow:10px 10px;
+//   //   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+// }
+
+

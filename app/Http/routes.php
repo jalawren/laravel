@@ -11,9 +11,12 @@
 |
 */
 
+use App\User;
+
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +30,16 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+
+//    Route::get('/support/key', 'SupportController@generateKey');
+//    Route::resource('/support', 'SupportController');
+//
+//    Route::get('/browser/info', 'SupportController@browserDetect');
+
+    Route::auth();
+    Route::get('/home', 'HomeController@index');
+
+
 });
+
+

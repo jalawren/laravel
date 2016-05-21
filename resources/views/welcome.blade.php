@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>jalawren.website</title>
+@extends('layouts.jalawren')
 
-       <!-- <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css"> -->
-        <link href="/css/app.css" rel="stylesheet" type="text/css">
+@section('content')
 
-    </head>
-    <body>
-      
-		<div class="container">
-			
-				<h3>coming soon</h3>
-				
-				<p>pardon the dust...</p>				
-		</div>
+    <div id="app" class="container jl-container" align="center">
 
-        
-    </body>
-</html>
+        <layout></layout>
+
+    </div>
+
+@stop
