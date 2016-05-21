@@ -43,7 +43,7 @@
                     <h3>
                         <span class="jl-font"> ></span>
 
-                        <print text="jasontlawrence.com - coming soon" time="1500"></print>
+                        <print text="jasontlawrence.com - coming soon" time="1800"></print>
 
                     </h3>
 
