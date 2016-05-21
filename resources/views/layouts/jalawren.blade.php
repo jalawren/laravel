@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>jalawren.website</title>
+    <title>jasontlawrence.com</title>
 
     <link href="/css/app.css" rel="stylesheet" type="text/css">
 
